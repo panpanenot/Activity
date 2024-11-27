@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Browse n' Board</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+/* General Reset */
+body, h1, h2, p, a, input, button {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  h1 {
+    color: #ffa500;
+  }
+  
+  body {
+    background-color: #f5f7fa;
+    color: #333;
+    line-height: 1.6;
+  }
+  
+  /* Header */
+  header {
+    position: absolute; /* Make the header overlay the hero section */
+    top: 0;
+    left: 0;
+    right: 0; /* Ensure it doesn't extend beyond the viewport */
+    width: 100%; /* Make it span the full width */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 60px;
+    color: #fff;
+    z-index: 10; /* Ensure the header stays above other elements */
+    box-sizing: border-box; /* Include padding in the width */
+    background-color: #002b5c90;
+    border-bottom-left-radius: 75%;
+    border-bottom-right-radius: 25%;
+  }
+  
+  header .logo {
+    font-size: 2rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
+  header .logo {
+    display: flex;
+    flex-direction: column; /* Stack the text */
+    align-items: flex-start; /* Align text neatly */
+    font-weight: bold;
+    letter-spacing: 1px;
+    line-height: 1.2; /* Adjust spacing between the lines */
+  }
+
+  header .logo .browse {
+      font-size: 2rem; /* Slightly larger for visibility */
+      color: #ffa500; /* Vibrant orange */
+      font-family: 'Poppins', sans-serif;
+      text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5); /* Stronger shadow for visibility */
+  }
+
+  header .logo .board {
+      font-size: 2.5rem; /* Larger text for emphasis */
+      color: #ffffff; /* Clean white for contrast */
+      font-family: 'Roboto', sans-serif; /* Different font for distinction */
+      text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.7); /* Enhanced shadow */
+      text-transform: uppercase; /* Highlight importance */
+  }
+
+  
+  .navbar a {
+    margin: 0 15px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s;
+  }
+  
+  .navbar a:hover {
+    color: #ffa500; /* Accent color */
+  }
+  
+  .navbar a.search-btn {
+    padding: 10px 20px;
+    background: linear-gradient(90deg, #0073e6, #0056a6); /* Gradient Blue */
+    border-radius: 20px;
+    color: white;
+    font-weight: bold;
+    transition: background 0.3s;
+  }
+  
+  .navbar a.search-btn:hover {
+    background: linear-gradient(90deg, #0056a6, #003d80);
+  }
+
+/* About Section */
+.about {
+  text-align: center;
+  padding: 60px 20px;
+  background-color: #eef2f7;
+  background: 
+        linear-gradient(to bottom, rgba(0, 40, 85, 0.4), rgba(0, 0, 0, 1)),
+        url('wallpaper2.jpg');
+}
+
+.about h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  padding-top: 10%;
+}
+
+.about p {
+  font-size: 1.2rem;
+  max-width: 800px;
+  margin: 0 auto;
+  color: #e6e6e6;
+}
+
+/* Meet Our Team Section */
+.team {
+  padding: 60px 20px;
+  background: linear-gradient(180deg, #000000, #002b5c 50%, #000000); /* Black top/bottom, blue middle */
+  text-align: center;
+  color: #fff;
+}
+
+.team h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  color: #eef2f7;
+  font-weight: bold;
+}
+
+.team-intro {
+  font-size: 1.2rem;
+  margin-bottom: 40px;
+  color: #d0d7e3;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.team-intro2 {
+  font-size: 1.1rem;
+  margin-bottom: 40px;
+  color: #d0d7e391;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.team-members {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  padding: 0 10%;
+}
+
+.member {
+  background-color: rgba(255, 255, 255, 0.85); /* Transparent white */
+  border-radius: 15px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Deeper shadow for modern look */
+  padding: 20px;
+  width: 250px;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s; /* Animation effects */
+}
+
+.member:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.3);
+}
+
+.member img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 15px;
+  border: 3px solid #005b96; /* Bold border for profile images */
+}
+
+.member h3 {
+  font-size: 1.5rem;
+  margin-bottom: 5px;
+  color: #002b5c;
+}
+
+.member p {
+  font-size: 1rem;
+  color: #555;
+  font-style: italic;
+}
+
+/* Contact Section */
+.contact {
+  padding: 50px 20px;
+  background: #020910; /* Blue to black gradient */
+  text-align: center;
+  color: #fff;
+}
+
+.contact h1 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+  color: #eef2f7;
+  font-weight: bold;
+}
+
+.contact p {
+  font-size: 1rem;
+  margin-bottom: 30px;
+  color: #d0d7e3;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 1rem;
+  color: #fff;
+}
+
+.contact-item i {
+  font-size: 1.7rem;
+  color: #ffa500; /* Accent color for icons */
+}
+
+.contact-item a {
+  color: #ffa500;
+  text-decoration: none;
+}
+
+.contact-item a:hover {
+  color: #ffcc66;
+  text-decoration: underline;
+}
+
+
+/* Mission and Vision Section */
+.mission-vision {
+  display: flex;
+  justify-content: space-around;
+  background: #000;
+  padding: 50px 20px;
+  gap: 30px;
+}
+
+.mission, .vision {
+  flex: 1;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  background-color: #ffa60036;
+  border-radius: 10px;
+}
+
+.mission:hover, .vision:hover {
+    transform: translateY(-10px); /* More pronounced lift */
+    background: rgba(255, 255, 255, 0.09); /* Slightly brighter on hover */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15); /* Shadow emphasis */
+    border-radius: 15px;
+  }
+
+.mission h2, .vision h2 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  color: #f5f7fa;
+}
+
+.mission p, .vision p {
+  font-size: 1rem;
+  color: #ffffff7b;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #005b96;
+  color: #fff;
+  font-size: 0.9rem;
+}
+
+</style>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <p class="browse">Browse n'</p>
+      <p class="board">BOARD</p>
+    </div>  
+    <nav class="navbar">
+      <a href="index.html">Home</a>
+      <a href="about us.html">About Us</a>
+      <a href="browse.html">Find a Boarding House</a>
+      <a href="about us.html#contact">Contact</a>
+      <a href="#" class="search-btn">Sign Up</a>
+    </nav>
+  </header>
+
+  <!-- About Section -->
+  <section class="about" id="about">
+    <h1>About Us</h1>
+    <p>At <strong>Browse n' Board</strong>, we are committed to helping students and professionals find the perfect boarding houses that match their preferences. We strive to make the process of finding comfortable and affordable housing as easy and stress-free as possible.</p>
+  </section>
+
+  <!-- Mission and Vision Section -->
+  <section class="mission-vision">
+    <div class="mission">
+      <h2>Our Mission</h2>
+      <p>To provide a seamless platform that connects individuals with high-quality and affordable boarding houses, ensuring their comfort and peace of mind.</p>
+    </div>
+    <div class="vision">
+      <h2>Our Vision</h2>
+      <p>To become the most trusted platform for boarding house searches, making comfortable living accessible to everyone.</p>
+    </div>
+  </section>
+
+<!-- Our Team Section -->
+<section class="team" id="team">
+  <h1>Meet Our Team</h1>
+  <p class="team-intro">Get to know the amazing minds behind Browse n' Board.</p>
+  <p class="team-intro2">"Diverse skills and minds that complement each other,.."</p>
+  <div class="team-members">
+    <div class="member">
+      <img src="1.png" alt="Trishtine Mary Amigo">
+      <h3>Trishtine Mary Amigo</h3>
+      <p>CEO</p>
+    </div>
+    <div class="member">
+      <img src="2.png" alt="Dean Rozelyn Giulia R. Alsa">
+      <h3>Dean Rozelyn Giulia R. Alsa</h3>
+      <p>COO</p>
+    </div>
+    <div class="member">
+      <img src="3.png" alt="Olsen C. Alvarez">
+      <h3>Olsen C. Alvarez</h3>
+      <p>CTO</p>
+    </div>
+    <div class="member">
+      <img src="4.png" alt="Arwell Jhyves P. Abejuela">
+      <h3>Arwell Jhyves P. Abejuela</h3>
+      <p>CFO</p>
+    </div>
+    <div class="member">
+      <img src="5.png" alt="Lady Charmaine G. Bacol">
+      <h3>Lady Charmaine G. Bacol</h3>
+      <p>CMO</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- Contact Section -->
+<section class="contact" id="contact">
+  <h1>Contact Us</h1>
+  <p>Got questions? Feel free to reach out to us through any of the channels below:</p>
+  <div class="contact-info">
+    <div class="contact-item">
+      <i class="fas fa-envelope"></i>
+      <span><strong>Email:</strong> <a href="mailto:browsenboard@gmail.com">browsenboard@gmail.com</a></span>
+    </div>
+    <div class="contact-item">
+      <i class="fas fa-phone"></i>
+      <span><strong>Phone:</strong> <a href="tel:+639382304633">+63 (938) 230-4633</a></span>
+    </div>
+    <div class="contact-item">
+      <i class="fab fa-facebook"></i>
+      <span><strong>Facebook:</strong> <a href="https://web.facebook.com/profile.php?id=61566746857191" target="_blank">Visit our Page</a></span>
+    </div>
+  </div>
+</section>
+
+
+</body>
+</html>

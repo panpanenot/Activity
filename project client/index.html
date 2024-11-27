@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Browse n' Board</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <p class="browse">Browse n'</p>
+      <p class="board">BOARD</p>
+    </div>  
+    <nav class="navbar">
+      <a href="index.html">Home</a>
+      <a href="about us.html">About Us</a>
+      <a href="browse.html">Find a Boarding House</a>
+      <a href="about us.html#contact">Contact</a>
+      <a href="#" class="search-btn">Sign Up </a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <h1>
+          Browse 
+          <i class="fas fa-search icon"></i>
+          and Board 
+          <i class="fas fa-home icon"></i>
+        </h1>
+        <p class="hero-subtext">Find your ideal boarding house now!</p>
+        <div class="search-bar">
+          <input type="text" id="heroSearchInput" placeholder="Find a boarding house">
+          <button id="heroSearchButton"><i class="fas fa-search"></i></button>
+        </div>
+      </div>
+      <script>
+        // Event listener for the hero search button
+        document.getElementById("heroSearchButton").addEventListener("click", function () {
+          const query = document.getElementById("heroSearchInput").value.trim().toLowerCase();
+          const cards = document.querySelectorAll(".boarding-card");
+      
+          if (query) {
+            let matchFound = false;
+            cards.forEach(card => {
+              const name = card.dataset.name.toLowerCase();
+              const location = card.dataset.location.toLowerCase();
+      
+              // Match the search query with card data
+              if (name.includes(query) || location.includes(query)) {
+                card.style.display = "block";
+                matchFound = true;
+              } else {
+                card.style.display = "none";
+              }
+            });
+      
+            if (!matchFound) {
+              alert("No results found.");
+            }
+          } else {
+            alert("Please enter a search term!");
+          }
+        });
+      
+        // Reset view on empty input
+        document.getElementById("heroSearchInput").addEventListener("input", function () {
+          if (!this.value.trim()) {
+            const cards = document.querySelectorAll(".boarding-card");
+            cards.forEach(card => {
+              card.style.display = "block";
+            });
+          }
+        });
+      </script>
+      
+    </section>
+    
+    <section class="features">
+      <div class="feature">
+        <img src="home.png" alt="Home Icon">
+        <p>Home</p>
+      </div>
+      <div class="feature">
+        <img src="wifi-icon.png" alt="WiFi Icon">
+        <p>WiFi</p>
+      </div>
+      <div class="feature">
+        <img src="study.png" alt="Study Icon">
+        <p>Study Area</p>
+      </div>
+      <div class="feature">
+        <img src="meal.png" alt="Meals Icon">
+        <p>Meals</p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
